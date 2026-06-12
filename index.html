@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kesayanganku 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght=500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #ffe6f2;
+            font-family: 'Quicksand', sans-serif;
+            display: block;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .layer {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+            padding: 25px 20px;
+            width: 95%;
+            max-width: 400px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            margin: 40px auto;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10;
+            /* Agar di atas efek hujan hati */
+        }
+
+        #layer1 {
+            display: block;
+            background: transparent;
+            box-shadow: none;
+            margin-top: 20vh;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: #ff4d88;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* --- STYLES CAKE --- */
+        .cake-container {
+            font-size: 60px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        /* --- STYLES SLIDESHOW --- */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            margin: 15px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .mySlides {
+            display: none;
+            width: 100%;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+        }
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* --- TOMBOL --- */
+        button {
+            background-color: #ff4d88;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-family: 'Fredoka One', cursive;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-kuis {
+            width: 48%;
+            margin: 5px 1%;
+            display: inline-block;
+        }
+
+        .btn-alasan {
+            background-color: #ff80aa;
+            font-size: 14px;
+            padding: 8px 15px;
+            margin: 5px;
+            width: auto;
+        }
+
+        /* --- ANIMASI HUJAN HATI --- */
+        .heart-drop {
+            position: fixed;
+            top: -20px;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) translateX(30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="ulangtahun.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="layer1" class="layer">
+        <h1 style="font-size: 36px;">Hai, Bee! 👋</h1>
+        <p>Ada paket hadiah spesial nih buat kamu yang lagi jauh di sana...</p>
+        <button onclick="bukaLayer(2)">Buka Kadonya 🎁</button>
+    </div>
+
+    <div id="layer2" class="layer">
+        <h1>Cieee Ulang Tahun! 🎉</h1>
+        <img src="bear.gif" alt="Cute GIF">
+        <p>Happy Birthday ya sayang! Maaf banget ya kali ini kita rayainnya virtual dulu, belum bisa tiup lilin bareng
+            secara langsung.</p>
+        <button onclick="bukaLayer(3)">Ada Kelanjutannya... 👉</button>
+    </div>
+
+    <div id="layer3" class="layer">
+        <h1>Kuis Dulu Dong! 😜</h1>
+        <p>Kuis kilat! Menurut penelitian, apa hal yang paling manis dan bisa bikin kecanduan di dunia ini?</p>
+        <button class="btn-kuis" onclick="jawabKuis(false)">Cokelat & Es Krim</button>
+        <button class="btn-kuis" onclick="jawabKuis(true)">Senyuman amii waktu baca ini! ✨ 🥰❤️</button>
+    </div>
+
+    <div id="layer4" class="layer">
+        <h1>Tiup Lilinnya Dong! 🎂</h1>
+        <p id="teksLilin">Klik pada lilin di bawah ini untuk meniupnya ya, Bee!</p>
+        <div id="kueLilin" class="cake-container" onclick="tiupLilin()">🎂🎂<br>🕯️</div>
+        <button id="btnLanjutLilin" onclick="bukaLayer(5)" style="display: none;">Lanjut Sekarang 💕</button>
+    </div>
+
+    <div id="layer5" class="layer">
+        <h1>Untuk Bee Tersayang.. 💌</h1>
+        <p id="suratKetik" style="text-align: left; min-height: 100px; font-size: 15px;"></p>
+
+        <div id="boxAlasan" style="display: none;">
+            <p style="font-weight: bold; color: #ff4d88; margin-bottom: 5px;">Klik tombol di bawah ini ya:</p>
+            <button class="btn-alasan"
+                onclick="alert('Karena kamu selalu bisa bikin aku tenang walau cuma lewat telepon. 💖')">Alasan
+                1</button>
+            <button class="btn-alasan"
+                onclick="alert('Karena senyum manis kamu itu bener-bener moodbooster aku setiap hari! 🥰')">Alasan
+                2</button>
+            <button class="btn-alasan"
+                onclick="alert('Karena kamu adalah masa depan yang mau aku perjuangkan terus. 🥺❤️')">Alasan 3</button>
+            <button onclick="bukaLayer(6)" style="margin-top: 20px;">Lihat Kejutan Terakhir 🌸</button>
+        </div>
+    </div>
+
+    <div id="layer6" class="layer">
+        <h1>Apresiasi Bee Tercantik 👑</h1>
+        <p>Slide ini akan berputar otomatis, nikmati ya sayang...</p>
+        <div class="slideshow-container">
+            <div class="mySlides fade"> <img src="8.JPG"> </div>
+            <div class="mySlides fade"> <img src="9.JPG"> </div>
+            <div class="mySlides fade"> <img src="w.JPG"> </div>
+            <div class="mySlides fade"> <img src="g.JPG"> </div>
+            <div class="mySlides fade"> <img src="i.JPG"> </div>
+            <div class="mySlides fade"> <img src="j.JPG"> </div>
+            <div class="mySlides fade"> <img src="o.JPG"> </div>
+            <div class="mySlides fade"> <img src="q.JPG"> </div>
+            <div class="mySlides fade"> <img src="s.JPG"> </div>
+            <div class="mySlides fade"> <img src="z.JPG"> </div>
+            <div class="mySlides fade"> <img src="r.JPG"> </div>
+            <div class="mySlides fade"> <img src="n.JPG"> </div>
+
+
+        </div>
+        <p style="font-weight: bold; margin-top: 20px; color: #ff4d88; font-size: 18px;">I love you to the moon and
+            back! 🚀💖</p>
+    </div>
+
+    <script>
+        const teksSurat = "Menahan rindu tiap malam karena LDR itu emang gak mudah ya, Bee. Tapi setiap kali aku ingat senyum kamu, rasa lelahnya langsung hilang. Terima kasih ya sudah bertahan sejauh ini sama aku... Semoga di umurmu yang baru ini kamu makin bahagia, urusanmu dilancarkan, dan semoga waktu secepatnya mempertemukan kita. Aku di sini selalu mendukungmu. ❤️";
+        let indexTeks = 0;
+        let hujanHatiInterval;
+
+        function ketikTeks() {
+            if (indexTeks < teksSurat.length) {
+                document.getElementById("suratKetik").innerHTML += teksSurat.charAt(indexTeks);
+                indexTeks++;
+                setTimeout(ketikTeks, 50);
+            } else {
+                document.getElementById("boxAlasan").style.display = "block";
+            }
+        }
+
+        // LOGIKA EFEK HUJAN HATI
+        function mulaiHujanHati() {
+            if (hujanHatiInterval) return; // Mencegah duplikasi
+            hujanHatiInterval = setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart-drop");
+                heart.innerText = ["💖", "❤️", "🌸", "💕", "✨"][Math.floor(Math.random() * 5)];
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+                heart.style.opacity = Math.random() * 0.7 + 0.3;
+                heart.style.fontSize = Math.random() * 12 + 12 + "px";
+                document.body.appendChild(heart);
+
+                setTimeout(() => { heart.remove(); }, 5000);
+            }, 400);
+        }
+
+        function bukaLayer(layerTujuan) {
+            if (layerTujuan === 2) {
+                document.getElementById("bgMusic").play();
+                mulaiHujanHati(); // Hujan hati langsung aktif pas kado dibuka
+            }
+            let layers = document.querySelectorAll('.layer');
+            layers.forEach(layer => layer.style.display = 'none');
+            document.getElementById('layer' + layerTujuan).style.display = 'block';
+
+            if (layerTujuan === 5) {
+                document.getElementById("suratKetik").innerHTML = "";
+                indexTeks = 0;
+                ketikTeks();
+            }
+            if (layerTujuan === 6) {
+                showSlides();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function jawabKuis(benar) {
+            if (benar) { alert("Jawaban kamu 100% tepat! 😍"); bukaLayer(4); }
+            else { alert("Ehh salah! Coba tebak lagi 😜"); }
+        }
+
+        function tiupLilin() {
+            document.getElementById("kueLilin").innerHTML = "🎂🎂<br>💨";
+            document.getElementById("teksLilin").innerHTML = "<b>Make a wish, sayang! ✨ Selalu ada doa terbaik buat kamu.</b>";
+            document.getElementById("btnLanjutLilin").style.display = "block";
+        }
+
+        // LOGIKA SLIDESHOW OTOMATIS
+        let slideIndex = 0;
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3500);
+        }
+    </script>
+</body>
+
+</html>
